@@ -9,22 +9,23 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <link rel="icon" href="../../favicon.ico">
-    <link rel="canonical" href="https://getbootstrap.com/docs/3.3/examples/dashboard/">
+    <!-- <link rel="canonical" href="https://getbootstrap.com/docs/3.3/examples/dashboard/"> -->
 
     <title>Graphene Chem Simulator</title>
 
     <!-- Bootstrap core CSS -->
     <link rel="stylesheet" type="text/css" href="assets/css/font-awesome.min.css">
-    <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css">
+    <!-- <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css"> -->
     <!-- <link rel="stylesheet" type="text/css" href="assets/css/demo.css"> -->
     <link rel="stylesheet" type="text/css" href="assets/css/cobler.css">
     <link rel="stylesheet" type="text/css" href="assets/css/builder.css">
     <link rel="stylesheet" type='text/css' href="assets/css/combobox.css">
 
-    <link rel="stylesheet" type='text/css' href="assets/css/bootstrap-datepicker.min.css">
-    <link rel="stylesheet" type="text/css" href="assets/css/colorpicker.min.css">
+    <!-- <link rel="stylesheet" type='text/css' href="assets/css/bootstrap-datepicker.min.css"> -->
+    <!-- <link rel="stylesheet" type="text/css" href="assets/css/colorpicker.min.css"> -->
     <link rel="stylesheet" type="text/css" href="assets/css/c3.min.css">
     <link rel="stylesheet" type="text/css" href="assets/css/dropzone.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/gform.css">
     <link
     rel="stylesheet"
     href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
@@ -48,6 +49,7 @@
     display: none;
 } */
 body{
+  padding:0;margin:0;
   /* background: #005a43; */
   /* background-image:radial-gradient(#fff,rgb(228,241,221) 60%); */
   /* background-repeat:no-repeat */
@@ -76,11 +78,16 @@ a:hover,a:focus{text-decoration:none;color:#005a43;cursor: pointer;}
 
 
 
-
+pre{
+  background:none;
+  border:none;
+  font-weight: bold;
+}
 
 /*stones*/
 body {
-  background: #000;
+  background: #444;
+  background: #a8b1b9;
   perspective: 0px;
   perspective-origin: 50% 50%;
 }
@@ -185,118 +192,63 @@ body {
   animation-delay: 0.5s;
 }
 .stone-blue .stone-face {
-  background: blue;
-  box-shadow: inset 0 0 50px 0px blue, 0 0 100px 15px blue;
+  background: #5f5fff;
+  box-shadow: inset 0 0 50px 0px #5f5fff, 0 0 100px 15px #5f5fff;
 }
+input{color:#fff}
 
+.wrapper {
+  display: grid;
+  grid-template-columns:
+    1fr
+    min(65ch, 100%)
+    1fr;
+}
+.wrapper > * {
+  grid-column: 2;
+}
+.full-bleed {
+  width: 100%;
+  grid-column: 1 / 4;
+}
+.column{position:relative}
 </style>
   </head>
 
   <body>
 
-    <nav class="navbar navbar-default navbar-fixed-top">
-      <div class="container-fluid" style="background: #005a43;">
-        <div class="navbar-header" style="width:100%">
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" style="color:#efefef" href="#"><i class="fa fa-flask"></i> Binghamton University Chemistry Simulator</a>
-          <button class="btn btn-info pull-right" style="margin-top: 10px;margin-right:15px" onclick=download()><i class="fa fa-download"></i> Download</button>
-        </div>
-        <div id="navbar" class="navbar-collapse collapse">
-          <ul class="nav navbar-nav navbar-right visible-xs">
-          </ul>
-        </div>
-      </div>
-    </nav>
 
-    <div class="container-fluid hidden">
-      <div class="row">
-        <div class="col-sm-3 col-md-2 sidebar target">
-          <ul class="nav nav-sidebar">
-            <!-- <li id="GC"><a href="#device=GC">Gas Chromatograph</a></li>
-            <li id="CV"><a href="#device=CV">Cyclic Voltammeter</a></li>
-            <li id="FTIR"><a href="#device=FTIR">Fourier Transform Infrared Spectrometer</a></li>
-            <li id="F"><a href="#device=F">Fluorimeter</a></li>
-            <li id="UV-Vis"><a href="#device=UV-Vis">UV-Vis Spectrophotometer</a></li>
-            <li id="GC-MS"><a href="#device=GC-MS">Gas Chromatograph - Mass Spectrometer</a></li>
-            <li id="HPLC"><a href="#device=HPLC">High Performance Liquid Chromatograph</a></li>
-            <li id="NMR"><a href="#device=NMR">Nuclear Magnetic Resonance</a></li>
-            <li id="FAAS"><a href="#device=FAAS">Flame Atomic Absorption Spectrophotometer</a></li>
-            <li id="DSC"><a href="#device=DSC">Differential Scanning Calorimeter</a></li>
-            <li id="E"><a href="#device=E">Electrophoresis</a></li> -->
-          </ul>
-        </div>
-      </div>
-    </div>
 
-        </div>
+
         
-        <div>
+      <div>
 
-          <div class="infinity-stone">
-            <div class="stone-face stone-face-front"></div>
-            <div class="stone-face stone-face-back"></div>
+        
+        <main class="wrapper">
+          <div class="full-bleed"><!--9 col-sm-offset-3 col-md-10 col-md-offset-2 main-->
+            <div id="stones" class="" style="background-color: #333;padding-left:5%;height:157px;overflow: hidden;position:relative;top:-25px"></div>
           </div>
-          
-          <div class="infinity-stone stone-green">
-            <div class="stone-face stone-face-front"></div>
-            <div class="stone-face stone-face-back"></div>
-          </div>
-          
-          <div class="infinity-stone stone-orange">
-            <div class="stone-face stone-face-front"></div>
-            <div class="stone-face stone-face-back"></div>
-          </div>
-          
-          <div class="infinity-stone stone-purple">
-            <div class="stone-face stone-face-front"></div>
-            <div class="stone-face stone-face-back"></div>
-          </div>
-          
-          <div class="infinity-stone stone-yellow">
-            <div class="stone-face stone-face-front"></div>
-            <div class="stone-face stone-face-back"></div>
-          </div>
-          
-          <div class="infinity-stone stone-blue">
-            <div class="stone-face stone-face-front"></div>
-            <div class="stone-face stone-face-back"></div>
-          </div>
-        </div>
-        <div class="main container-fluid"><!--9 col-sm-offset-3 col-md-10 col-md-offset-2 main-->
-        </div>
+          <!-- <h1>Super 7 Infinity Saga Adventure</h1> -->
+          <div  id="form"></div>
+        </main>
         
       </div>
-    </div>
 
 <script type="text/javascript" src="assets/js/jquery.min.js"></script>
 <script type="text/javascript" src="assets/js/sortable.js"></script>
-<script type="text/javascript" src="assets/js/bootstrap.min.js"></script>
+<!-- <script type="text/javascript" src="assets/js/bootstrap.min.js"></script> -->
 <script type="text/javascript" src="assets/js/lodash.min.js"></script>
 <script type="text/javascript" src="assets/js/moment.js"></script>
 <script type="text/javascript" src="assets/js/dropzone.js"></script>
-<script type="text/javascript" src="assets/js/bootstrap-datepicker.js"></script>
+<script type="text/javascript" src="assets/js/toastr.min.js"></script>
 <script type="text/javascript" src="assets/js/popper.min.js"></script>
-<script type="text/javascript" src="assets/js/gform_bootstrap.min.js"></script>
+<script type="text/javascript" src="assets/js/gform_default.min.js"></script>
+<script type="text/javascript" src="assets/js/cleave.min.js"></script>
+<script type="text/javascript" src="assets/js/ractive.min.js"></script>
 <script type="text/javascript" src="assets/js/lockr.min.js"></script>
 <script type="text/javascript" src="assets/js/d3.min.js"></script>
 <script type="text/javascript" src="assets/js/c3.min.js"></script>
 <script type="text/javascript" src="assets/js/lib.js"></script>
-<script type="text/javascript" src="assets/js/instruments.js"></script>
-
-<script type="text/javascript" src="assets/js/components.js"></script>
-<script type="text/javascript" src="assets/js/components/cv.js"></script>
-<script type="text/javascript" src="assets/js/components/gc.js"></script>
-<script type="text/javascript" src="assets/js/components/ftis.js"></script>
-<script type="text/javascript" src="assets/js/components/f.js"></script>
-<script type="text/javascript" src="assets/js/components/uvvis.js"></script>
-<script type="text/javascript" src="assets/js/components/hplc.js"></script>
-<script type="text/javascript" src="assets/js/components/ms.js"></script>
-
 
 
 
@@ -309,83 +261,8 @@ $('body').keydown(function(event) {
       break;
   }
 });
-globalfile = ""
-hash = function(s){
-  return s.split("").reduce(function(a,b){a=((a<<5)-a)+b.charCodeAt(0);return a&a},0);              
-}
-  download = function(){
-    var user = new gform({fields:[{label:"Your name",name:"name"}]}).on('save',function(e){
 
 
-
-      _.download({name:e.form.get('name'),file:(globalfile||""),data:_.map(instruments[hashParams.device].components
-      ,function(component){
-      return {name:component,data:JSON.stringify(gform.instances[component])}
-      }),check:hash(e.form.get('name'))},e.form.get('name')+'_'+hashParams.device)
-      e.form.trigger('close');
-    }).on('cancel',function(e){e.form.trigger('close');}).modal();
-  }
-
-
-function init(){
-if(typeof c3chart !== 'undefined'){
-  c3chart.destroy()
-  delete c3chart;
-}
-// $('#errors').html('')
-
-
-  gform.types['file'] = gform.types['text'] 
-
-  gform.types['number']= _.extend({}, gform.types['input'],{get:function(){
-    return parseFloat(this.el.querySelector('input[name="' + this.name + '"]').value);
-}, render: function(){
-    return gform.render(this.type, this).split('value=""').join('value="'+this.value+'"')
-},});
-
-  hashParams = QueryStringToHash(document.location.hash.substr(1) || '')
-  $('li.active').removeClass('active')
-  $('#'+hashParams.device).addClass('active')
-    
-  compontent = `<div class="row">
-      <div class="col-md-4 form-horizontal" style=""><div class="well form"></div></div>
-      <div class="col-md-8" style="">
-        {{#image}}<div class="well" style="overflow:hidden"><div><img style="float:right;height:150px" src="assets/img/{{image}}"></div><span><h3>{{legend}}</h3><p>{{description}}</p></span></div>{{/image}}
-        <div class="well target" style="height:350px;"><div class="chart"></div></div></div>
-      </div>
-`;
-  document.querySelector('.main').innerHTML = "";
-  _.each(gform.instances,function(form){
-    form.destroy();
-  })
-  instrument = instruments[hashParams.device||"HOME"];
-
-  _.each(instrument.components,function(instrument_component){
-    if(_.find(instrument_components, {name:instrument_component||"HOME"}).html){
-      document.querySelector('.main').append(gform.create(_.find(instrument_components, {name:instrument_component||"HOME"}).html))
-    }
-    if(_.find(instrument_components, {name:instrument_component||"HOME"}).fields){
-      el = gform.create(gform.renderString(compontent,_.find(instrument_components, {name:instrument_component||"HOME"})));
-      document.querySelector('.main').append(el)
-
-      myForm = new gform(_.extend({
-        "actions":[{type:"save",label:"Run",target:".gform-footer"}],
-        "default": {
-          "horizontal": true
-        },"horizontal": true
-      },_.find(instrument_components, {name:instrument_component||"HOME"})),el.querySelector('.form'))
-    }
-
-  })
-}
-_.each(instruments,function(item,key){
-    // if(item.disabled !== true){
-      document.querySelector('.target ul.nav').append(gform.create(gform.renderString('<li id="{{key}}"><a href="#device={{key}}">{{label}}</a></li>',{key:key,label:item.label})))
-      document.querySelector('#navbar ul.nav').append(gform.create(gform.renderString('<li id="{{key}}"><a href="#device={{key}}">{{label}}</a></li>',{key:key,label:item.label})))
-    // }
-})
-window.onhashchange = init;
-// init();
 function launchInterval(actions,interval){
   var actions = actions||[];
   var myinterval = setInterval(function(){
@@ -400,6 +277,311 @@ function launchInterval(actions,interval){
   },interval||1000)
   return myinterval;
 }
+
+
+
+
+data = JSON.parse((Lockr.get('data') || null))|| {stones:[
+{
+  label:"Time",
+  color:"green",
+},
+{
+  label:"Soul",
+  color:"orange",
+},
+{
+  label:"Reality",
+  color:"red",
+},
+{
+  label:"Space",
+  color:"blue",
+},
+{
+  label:"Power",
+  color:"purple",
+},
+{
+  label:"Mind",
+  color:"yellow",
+}
+],hints:[
+{
+  hint:`Alone I sit with such a view
+for a short time I will provide
+yummy food thats just for you
+if climbing you have tried
+
+CODEWORD?`,
+  answer:"Tesseract",
+  stoneIndex:0
+},
+{
+  hint:`FrIghtened Some Look CareFully
+  
+SOLUTION?`,
+  answer:"cliffs",
+},
+{
+  hint:`These cliffs will take you on a dangerous path, watch your step -  you have been here once before!
+
+CODEWORD?`,
+  answer:"Heart",
+  stoneIndex:1
+},
+{
+  hint:`Be careful what you touch 
+As you set off with a friend 
+But don’t let that be a crutch
+As you try to change the future
+In a place the mind can bend, 
+With a wild changing nature.
+
+CODEWORD?`,
+  answer:"Aether",
+  stoneIndex:2
+},
+{
+  hint:`Over the river and through the wood
+On an adventure through the land
+Don’t get caught, though you could
+And be careful of the quicksand
+
+CODEWORD?`,
+  answer:"Necklace",
+  stoneIndex:3
+},
+{
+  hint:`Look the ground is moving!
+Don't be afraid to cross 
+watch your step on stone ground
+or all could be for loss
+
+CODEWORD?`,
+  answer:"Orb",
+  stoneIndex:4
+},
+{
+  hint:`Tmcdq sgd aqhcfd
+  
+SOLUTION?`,
+  answer:"Under the bridge",
+},
+{
+  hint:`Under this bridge you will find words, stones, and sometimes a hitchhicking seed.
+
+CODEWORD?`,
+  answer:"Sceptor",
+  stoneIndex:5
+}
+]
+}
+// data.hints=[
+// {
+//   hint:`Alone I sit with such a view
+// for a short time I will provide
+// yummy food thats just for you
+// if climbing you have tried
+
+// CODEWORD?`,
+//   answer:"Tesseract",
+//   stoneIndex:0
+// },
+// {
+//   hint:`FrIghtened Some Look CareFully
+  
+// SOLUTION?`,
+//   answer:"cliffs",
+// },
+// {
+//   hint:"CODEWORD?",
+//   answer:"Heart",
+//   stoneIndex:1
+// },
+// {
+//   hint:`Be careful what you touch 
+// As you set off with a friend 
+// But don’t let that be a crutch
+// As you try to change the future
+// In a place the mind can bend, 
+// With a wild changing nature.
+
+// CODEWORD?`,
+//   answer:"Aether",
+//   stoneIndex:2
+// },
+// {
+//   hint:`Over the river and through the wood
+// On an adventure through the land
+// Don’t get caught, though you could
+// And be careful of the quicksand
+
+// CODEWORD?`,
+//   answer:"Necklace",
+//   stoneIndex:3
+// },
+// {
+//   hint:`Look the ground is moving!
+// Don't be afraid to cross 
+// watch your step on stone ground
+// or all could be for loss
+
+// CODEWORD?`,
+//   answer:"Orb",
+//   stoneIndex:4
+// },
+// {
+//   hint:`Tmcdq sgd aqhcfd
+  
+// SOLUTION?`,
+//   answer:"Under the bridge",
+// },
+// {
+//   hint:`Under this bridge you will find words, stones, and sometimes a hitchhicking seed.
+
+// CODEWORD?`,
+//   answer:"Sceptor",
+//   stoneIndex:5
+// }
+// ]
+  _.each(data.stones,function(stone){
+    _.each(['active','working','solved'],function(key){
+      stone['_'+key] = stone.active||false
+      Object.defineProperty(stone, key,{
+        get: function(){
+          return stone['_'+key];
+        },
+        set: function(newState){
+          stone['_'+key] = (newState==true);
+          Lockr.set('data', JSON.stringify(data, undefined, "\t"));
+          ractive.update(data)
+          myForm.set({stones:data.stones})
+        },enumerable: true,
+        configurable: true
+      });
+    })
+  })
+const myForm = new gform({
+  data:data,
+  actions:[],
+  fields:[
+  {name:"dates",placeholder:"#",label:false,type:"text",array:{min:3,max:3},forceRow:true,validate:[{type:'matches',value:["03/05/09","02/04/11","03/02/13"],message:'<span style="display:none"></span>'},{type:"unique",message:"Answer already used"}],success:'<span class="fa fa-check fa-lg" style="position: absolute;top: -28px;right: 12px;"></span>',satisfied:function(e){
+      return this.value.length == 8;
+    },show:[{type:"test",name:"/dated",test:function(e){return !e.owner.find({path:'/dated'}).value}
+    }]},
+
+    {name:"hints",type:"fieldset",label:false,array:{min:8,max:8},success:'',satisfied:function(e){
+      return true;
+    },parse:true,show:[{type:"test",name:"active",test:function(e){
+      debugger;
+      return (e.owner.find('dated').value == true && _.countBy(e.owner.filter('hints'),function(e){return e.value.answer.toLowerCase() == e.value.guess.toLowerCase()})['false']+e.index == 8 );
+      // return (e.value.stoneIndex == "" && e.value.answer == e.value.guess) || (e.owner.find('dated').value == true && _.countBy(e.owner.filter('active'),function(e){return e.value})['false'] +e.index == 6) && !e.owner.find({path:'/stones.'+e.index+'.active'}
+    // ).value
+    }
+    }],fields:[{name:"hint",type:"output",label:false,format:{value:"<pre>{{value}}</pre>"}},{name:"answer",type:'hidden'},{name:"stoneIndex",type:"hidden"},{name:"guess",label:"",type:"text",validate:[{type:'custom',test:function(e){
+      return !(e.field.parent.initialValue.answer.toLowerCase() == e.field.get().toLowerCase());
+    },message:'<span style="display:none"></span>'}] }]},
+
+    {name:"stones",label:false,show:false,parse:true,type:"fieldset",array:{min:6,max:6},fields:[{name:'label',type:'hidden'},{name:'color',type:'hidden'},{name:'active',label:"{{parent.initialValue.label}}",type:"checkbox"}]},
+    {name:"dated",type:"checkbox",show:false,parse:true},
+
+  ],
+  events:[{
+    event:"initialized",
+    handler:function(){
+      _.each(this.filter('dates'),function(field){
+        field.cleave = new Cleave(field.el.querySelector('input'), {
+            date: true,
+            delimiter: '/',
+            datePattern: ['m', 'd','y']
+        });
+      })
+    }
+  }
+  ]
+},"#form").on('valid',function(e){
+}).on('input:active', function(e){
+  data = _.extend(data,e.form.get())
+    Lockr.set('data', JSON.stringify(data, undefined, "\t"));
+    ractive.update(data)
+}).on('input:dated', function(e){
+  data = _.extend(data,e.form.get())
+    Lockr.set('data', JSON.stringify(data, undefined, "\t"));
+}).on('input:dates', function(e){
+  e.form.validate()
+  var complete = gform.instances.f0.find({name:"dates",valid:true,isSatisfied:true,editable:true})
+  if(complete){
+    gform.types.text.edit.call(complete,false)
+    var next = gform.instances.f0.find({name:"dates",isSatisfied:false})||gform.instances.f0.find({name:"dates",isSatisfied:true,valid:false})
+    if(next){
+      next.focus()
+    }else{
+      // _.find(data.stones,{label:"Space"}).active = true;
+      e.form.find('dated').set(true)
+      e.form.trigger('change:active')
+      // _.find(data.stones,{label:"Space"}).active = true;
+      // _.find(data.stones,{label:"Space"}).active = false;
+
+    data = _.extend(data,e.form.get())
+    Lockr.set('data', JSON.stringify(data, undefined, "\t"));
+    ractive.update(data)
+    }
+  }
+}).on('input:guess', function(e){
+  // gform.validateItem.call(e.form,true,e.field)
+  e.form.validate()
+  if(e.field.parent.get('stoneIndex') !== ''){
+    e.form.filter('active')[parseInt(e.field.parent.get('stoneIndex'))].set(e.field.valid)
+  }else{
+    e.form.trigger('change:active')
+  }
+  data = _.extend(data,e.form.get())
+    Lockr.set('data', JSON.stringify(data, undefined, "\t"));
+    ractive.update(data)
+  // return e.form.validate()
+  // var complete = gform.instances.f0.find({name:"dates",valid:true,isSatisfied:true,editable:true})
+  // if(complete){
+  //   gform.types.text.edit.call(complete,false)
+  //   var next = gform.instances.f0.find({name:"dates",isSatisfied:false})||gform.instances.f0.find({name:"dates",isSatisfied:true,valid:false})
+  //   if(next){
+  //     next.focus()
+  //   }else{
+  //     _.find(data.stones,{label:"Space"}).active = true;
+  //   }
+  // }
+}).on('input:hint', function(e){
+
+})
+
+
+
+Object.defineProperty(data, 'dates',{
+  get: function(){
+    myForm.get()['dates']
+  },
+  set: function(value){
+
+    myForm.set({dates:value})
+    Lockr.set('data', JSON.stringify(data, undefined, "\t"));
+    ractive.update(data)
+  },enumerable: true,configurable: true
+});
+
+ var template = `{{#stones}}<div id="{{label}}" class="{{#active}}animate__animated animate__fadeInUp{{/active}}{{^active}}animate__animated animate__fadeOutUp{{/active}}"  style="width:15%;display:inline-block;{{^active}}visibility: hidden{{/active}}">
+
+          <div class="infinity-stone stone-{{color}} ">
+            <div class="stone-face stone-face-front"></div>
+            <div class="stone-face stone-face-back"></div>
+          </div>
+        </div>{{/stones}}`
+
+        var ractive = Ractive({
+  target: "#stones",
+  template: template,
+  data: data
+});
+
 </script>
 
   </body>
