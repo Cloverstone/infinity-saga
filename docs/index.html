@@ -309,7 +309,8 @@ data = JSON.parse((Lockr.get('data') || null))|| {stones:[
 ],hints:[
 {
   hint:`Alexis, Josephene and Parker -
-Welcome to the Infinity Saga! Should you accept this challenge you will be asked to follow clues that lead to treasure! You will be required to travel large distances over difficult terrain - this is not for the faint of heart!
+Welcome to the Infinity Saga! Should you accept this challenge you will be asked to follow clues that lead to treasure! 
+You will be required to travel large distances over difficult terrain - this is not for the faint of heart!
 
 Do you accept?`,
   answer:"YES"
@@ -482,11 +483,11 @@ const myForm = new gform({
     },show:[{type:"test",name:"/dated",test:function(e){return !e.owner.find({path:'/dated'}).value}
     }]},
 
-    {name:"hints",type:"fieldset",label:false,array:{min:8,max:8},success:'',satisfied:function(e){
+    {name:"hints",type:"fieldset",label:false,array:{min:10,max:10},success:'',satisfied:function(e){
       return true;
     },parse:true,show:[{type:"test",name:"active",test:function(e){
       debugger;
-      return (e.owner.find('dated').value == true && _.countBy(e.owner.filter('hints'),function(e){return e.value.answer.toLowerCase() == e.value.guess.toLowerCase()})['false']+e.index == 8 );
+      return (e.owner.find('dated').value == true && _.countBy(e.owner.filter('hints'),function(e){return e.value.answer.toLowerCase() == e.value.guess.toLowerCase()})['false']+e.index == 10 );
       // return (e.value.stoneIndex == "" && e.value.answer == e.value.guess) || (e.owner.find('dated').value == true && _.countBy(e.owner.filter('active'),function(e){return e.value})['false'] +e.index == 6) && !e.owner.find({path:'/stones.'+e.index+'.active'}
     // ).value
     }
